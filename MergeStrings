@@ -1,0 +1,27 @@
+class Solution:
+    def mergeAlternately(self, word1: str, word2: str) -> str:
+        # initializing an empty list to store the merged characters
+        merged = []
+
+        # getting the lengths of words
+        len1, len2 = len(word1), len(word2)
+
+        # iterate throught the length of the longer word
+        for i in range(max(len1, len2)):
+
+            # if the current index is within length of word1, add char
+            if i < len1:
+                merged.append(word1[i])
+
+            # if the current index is within the length of word 2, add its char
+            if i < len2:
+                merged.append(word2[i])
+
+        # join the list into a single string and return it
+        return ''.join(merged)
+
+
+sol = Solution()
+print(sol.mergeAlternately("abc", "pqr"))
+print(sol.mergeAlternately("ab", "pqrs"))
+print(sol.mergeAlternately("abcd", "pq"))
