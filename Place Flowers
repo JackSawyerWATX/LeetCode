@@ -1,0 +1,27 @@
+class Solution:
+    def canPlaceFlowers(self, flowerbed: List[int], n: int) -> bool:
+        
+        # Number of new flowers that can be planted
+        count = 0 
+        length = len(flowerbed)
+
+        for i in range(length):
+            # check if the current plot is empty and both adjecent plots are empty or out of bounds
+            if flowerbed[i] == 0:
+                emptyLeft = (i == 0) or (flowerbed[i - 1] == 0)
+                emptyRight = (i == length - 1) or (flowerbed[i + 1] == 0)
+
+                if emptyLeft and emptyRight:
+                    # plant a flower here
+                    flowerbed[i] = 1
+                    count += 1
+
+                    # Skip the next plot to avoid adjcent planting
+                    if count >= n:
+                        return True
+
+        return count >= n
+
+sol = Solution()
+print(sol.canPlaceFlowers([1, 0, 0, 0, 1], 1))  # Output: True
+print(sol.canPlaceFlowers([1, 0, 0, 0, 1], 2))  # Output: False
