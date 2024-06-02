@@ -1,0 +1,29 @@
+# Greatest Common Divisor of Strings
+
+import math
+
+class Solution:
+    def gcdOfStrings(self, str1: str, str2: str) -> str:
+        
+        #function to check if str2 is divisible by str1
+        def isDivisible(s, t):
+            if len(s) % len(t) != 0:
+                return False
+            return s == t * (len(s) // len(t))
+
+        # Compute the GCD of the lengths of the two strings
+        gcdLength = math.gcd(len(str1), len(str2))
+
+        # candidate for GCD string
+        gcdString = str1[:gcdLength]
+
+        # checks to see if gcdLength divides both str1 and str2
+        if isDivisible(str1, gcdString) and isDivisible(str2, gcdString):
+            return gcdString
+        else:
+            return ''
+
+sol = Solution()
+print(sol.gcdOfStrings("ABCABCABC", "ABC"))
+print(sol.gcdOfStrings("ABABABABAB", "AB"))
+print(sol.gcdOfStrings("LEET", "CODE"))
