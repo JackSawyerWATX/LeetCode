@@ -1,0 +1,33 @@
+from typing import List
+
+class Solution:
+    def compress(self, chars: List[str]) -> int:
+        write = 0
+        anchor = 0
+        
+        while anchor < len(chars):
+            read = anchor
+            # Move read to the end of the group of same characters
+            while read < len(chars) and chars[read] == chars[anchor]:
+                read += 1
+            
+            # Write the character
+            chars[write] = chars[anchor]
+            write += 1
+            
+            # Write the length if greater than 1
+            if read - anchor > 1:
+                for digit in str(read - anchor):
+                    chars[write] = digit
+                    write += 1
+            
+            # Move anchor to the start of the next group
+            anchor = read
+        
+        return write
+
+# Example usage:
+sol = Solution()
+print(sol.compress(["a","a","b","b","c","c","c"]))  # Output: 6, chars should be ["a","2","b","2","c","3"]
+print(sol.compress(["a"]))                         # Output: 1, chars should be ["a"]
+print(sol.compress(["a","b","b","b","b","b","b","b","b","b","b","b","b"]))  # Output: 4, chars should be ["a","b","1","2"]
